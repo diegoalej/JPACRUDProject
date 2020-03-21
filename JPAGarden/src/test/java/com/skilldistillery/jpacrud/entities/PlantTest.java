@@ -43,7 +43,7 @@ class PlantTest {
 	@Test
 	void test1() {
 		assertNotNull(plant);
-		assertEquals("Tomato", plant.getName());
+		assertEquals("Tomatoes", plant.getName());
 	}
 
 }

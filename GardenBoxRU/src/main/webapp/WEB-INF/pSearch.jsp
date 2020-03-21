@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Garden home page</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 
+
+<title>Search Results</title>
 </head>
 <body>
 	<!-- NAVIGATION -->
@@ -44,37 +45,40 @@
 		</div>
 	</nav>
 	<!-- MAIN BODY -->
-	<div class="fluid-container">
-		<div class="d-flex justify-content-center py-2">
-			<h1>Garden Box App</h1>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="d-flex justify-content-center p1">
-					<div class="form-group">
-						<form action="getPlant.do" method="GET" class="form">
-							Plant Id: <input type="text" name="pid" class="form-control" />
-							<input type="submit" value="Show Plant" class="form-control" />
-						</form>
-					</div>
-				</div>
-			</div>
-			<table>
-				<tr>
-					<th>Plant Name</th>
-					<th>Id</th>
-					<th>Storage/Use</th>
-				</tr>
-				<c:forEach var="x" items="${plants}">
-					<tr>
-						<td>${x.name}</td>
-						<td>${x.description}</td>
-						<td>${x.storageUse}</td>
-					</tr>
-				</c:forEach>
-			</table>
+	<div class="container">
+		<div class="row">
+			<h1>Your plant was found</h1>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row">
+			<h3>${plant.name}</h3>
+		</div>
+		<div class="row">
+			<div class="col-sm">One of three columns</div>
+			<div class="col-sm">One of three columns</div>
+			<div class="col-sm">One of three columns</div>
+		</div>
+	</div>
+	<table>
+		<tr>
+			<th>Plant Name</th>
+			<th>Id</th>
+			<th>Storage/Use</th>
+		</tr>
+		<tr>
+			<td>${plant.name}</td>
+			<td>${plant.description}</td>
+			<c:choose>
+				<c:when test="${empty plant.storageUse}">
+					<td>No storage description</td>
+				</c:when>
+				<c:otherwise>
+					<td>${plant.storageUse}</td>
+				</c:otherwise>
+			</c:choose>
+		</tr>
+	</table>
 	<!-- BOOTSTRAP JS FILES -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

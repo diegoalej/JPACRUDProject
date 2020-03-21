@@ -23,11 +23,22 @@ public class GardenController {
 	}
 
 	@RequestMapping(path = "getPlant.do", method = RequestMethod.GET, params = "pid")
-	public String showFilm(@RequestParam Integer pid, Model model) {
+	public String showPlant(@RequestParam Integer pid, Model model) {
 		String viewName = "pSearch";
 		Plant plant = dao.findById(pid);
 		model.addAttribute("plant", plant);
 
 		return viewName;
+	}
+	
+	// updates Plant
+	@RequestMapping(path = "updatePlant.do", method = RequestMethod.POST)
+	public String updatePlant(Plant plant, Model model) {
+		if (dao.updatePlant(plant)) {
+			model.addAttribute("plant", plant);
+			return "updateSuccess";
+		} else {
+			return "updateFail";
+		}
 	}
 }

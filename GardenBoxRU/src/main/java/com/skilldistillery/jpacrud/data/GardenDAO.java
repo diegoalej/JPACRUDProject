@@ -8,4 +8,5 @@ public interface GardenDAO {
 	
 	Plant findById(int id);
 	List<Plant>  findAll();
+	boolean updatePlant(Plant plant);
 }

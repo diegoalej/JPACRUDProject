@@ -7,13 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-
-
-<title>Update Successful</title>
 </head>
 <body>
 	<!-- NAVIGATION -->
@@ -48,7 +46,7 @@
 	<!-- MAIN BODY -->
 	<div class="container">
 		<div class="row">
-			<h1>Your plant was found</h1>
+			<h1>Your plant was updated</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -85,73 +83,6 @@
 			</c:choose>
 		</tr>
 	</table>
-	<p>
-
-		<button class="btn btn-primary" type="button" data-toggle="collapse"
-			data-target="#collapseExample" aria-expanded="false"
-			aria-controls="collapseExample">Update Plant</button>
-	</p>
-	<div class="collapse" id="collapseExample">
-		<div class="card card-body">
-			<form:form action="updatePlant.do" method="POST">
-				<label> Plant name </label>
-				<input type="text" name="name" value="${plant.name}" />
-				<br>
-				<label> Plant description </label>
-				<input type="text" name="description" value="${plant.description}" />
-				<br>
-				<label> Optimal sun </label>
-				<input type="text" name="optimalSun" value="${plant.optimalSun}" />
-				<br>
-				<label> Optimal soil </label>
-				<input type="text" name="optimalSoil" value="${plant.optimalSoil}" />
-				<br>
-				<label> Planting Considerations </label>
-				<input type="text" name="plantingConsiderations"
-					value="${plant.plantingConsiderations}" />
-				<br>
-				<label> When to plant </label>
-				<input type="text" name="whenToPlant" value="${plant.whenToPlant}" />
-				<br>
-				<label> Growing from seed </label>
-				<input type="text" name="growingFromSeed"
-					value="${plant.growingFromSeed}" />
-				<br>
-				<label> Transplanting </label>
-				<input type="text" name="transplanting" value="${plant.transplanting}" />
-				<br>
-				<label> Spacing </label>
-				<input type="text" name="spacing"
-					value="${plant.spacing}" />
-				<br>
-				<label> Watering </label>
-				<input type="text" name="watering" value="${plant.watering}" />
-				<br>
-				<label> Feeding </label>
-				<input type="text" name="feeding" value="${plant.feeding}" />
-				<br>
-				<label> Other care </label>
-				<input type="text" name="otherCare" value="${plant.otherCare}" />
-				<br>
-				<label> Diseases </label>
-				<input type="text" name="diseases" value="${plant.diseases}" />	
-				<br>
-				<label> Pests </label>
-				<input type="text" name="pests" value="${plant.pests}" />
-				<br>	
-				<label> Harvesting </label>
-				<input type="text" name="harvesting" value="${plant.harvesting}" />
-				<br>	
-				<label> Storage/use </label>
-				<input type="text" name="storageUse" value="${plant.storageUse}" />
-				<br>		
-				<input type="hidden" name="id" value="${plant.id}" />
-				<br>
-				<input type="submit" value="Update Plant" />
-			</form:form>
-		</div>
-	</div>
-
 	<!-- BOOTSTRAP JS FILES -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

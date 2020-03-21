@@ -11,12 +11,13 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="css/myStyles.css">
 
 </head>
 <body>
 	<!-- NAVIGATION -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Garden App</a>
+		<a class="navbar-brand" href="home.do">GardenBox App</a>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
@@ -59,20 +60,24 @@
 					</div>
 				</div>
 			</div>
-			<table>
-				<tr>
-					<th>Plant Name</th>
-					<th>Id</th>
-					<th>Storage/Use</th>
-				</tr>
-				<c:forEach var="x" items="${plants}">
+		</div>
+		<div class="container">
+			<div class="row">
+				<table>
 					<tr>
-						<td>${x.name}</td>
-						<td>${x.description}</td>
-						<td>${x.storageUse}</td>
+						<th>Plant Name</th>
+						<th>Id</th>
+						<th>Storage/Use</th>
 					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach var="x" items="${plants}">
+						<tr>
+							<td>${x.name}</td>
+							<td>${x.description}</td>
+							<td>${x.storageUse}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
 	</div>
 	<!-- BOOTSTRAP JS FILES -->

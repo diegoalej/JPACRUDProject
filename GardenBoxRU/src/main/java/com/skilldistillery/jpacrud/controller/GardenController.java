@@ -19,39 +19,52 @@ public class GardenController {
 	@RequestMapping(path = { "/", "home.do" })
 	public String index(Model model) {
 		model.addAttribute("plants", dao.findAll());
-		return "index";
+		return "WEB-INF/index.jsp";
 	}
 
 	@RequestMapping(path = "getPlant.do", method = RequestMethod.GET, params = "pid")
 	public String showPlant(@RequestParam Integer pid, Model model) {
-		String viewName = "pSearch";
+		String viewName = "WEB-INF/pSearch.jsp";
 		Plant plant = dao.findById(pid);
 		if (plant == null) {
-			return "nSearch";
+			return "WEB-INF/nSearch.jsp";
 		}
 		model.addAttribute("plant", plant);
 
 		return viewName;
 	}
-	
+
 	// updates Plant
 	@RequestMapping(path = "updatePlant.do", method = RequestMethod.POST)
 	public String updatePlant(Plant plant, Model model) {
 		if (dao.updatePlant(plant)) {
 			model.addAttribute("plant", plant);
-			return "updateSuccess";
+			return "WEB-INF/updateSuccess.jsp";
 		} else {
-			return "updateFail";
+			return "WEB-INF/updateFail.jsp";
 		}
 	}
-	
+
 	// deletes Plant by id
-		@RequestMapping("plantDelete.do")
-		public String deletePlant(@RequestParam("Delete") int plantId) {
-			if (dao.deletePlant(plantId)) {
-				return "deleteSuccess";
-			} else {
-				return "deleteFail";
-			}
+	@RequestMapping("plantDelete.do")
+	public String deletePlant(@RequestParam("Delete") int plantId) {
+		if (dao.deletePlant(plantId)) {
+			return "WEB-INF/deleteSuccess.jsp";
+		} else {
+			return "WEB-INF/deleteFail.jsp";
 		}
+	}
+
+	// user adds FILM
+	@RequestMapping(path = "addPlant.do", method = RequestMethod.POST)
+	public String addPlant(Plant plant, Model model) {
+		Boolean addPos = dao.addPlant(plant);
+		if(addPos) {
+			model.addAttribute("plant", plant);
+			return "WEB-INF/insertSucceed.jsp";
+		}
+		else {
+			return "WEB-INF/insertFail.jsp";
+		}
+	}
 }

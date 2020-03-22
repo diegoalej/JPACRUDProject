@@ -3,7 +3,9 @@ package com.skilldistillery.jpacrud.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -46,7 +48,7 @@ public class GardenDAOImpl implements GardenDAO {
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
 			System.out.println(plant);
-			String sql = "Update plant set plant.id=?," // 1
+			String jpql = "Update Plant set id=?," // 1
 					+ " plant.name=?," // 2
 					+ " plant.description=?," // 3
 					+ " plant.optimal_sun=?," // 4
@@ -64,7 +66,7 @@ public class GardenDAOImpl implements GardenDAO {
 					+ " plant.harvesting=?," // 16
 					+ " plant.storage_use=?" // 17
 					+ " WHERE plant.id=?"; // 18
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(jpql);
 			stmt.setInt(1, plant.getId());
 			stmt.setString(2, plant.getName());
 			stmt.setString(3, plant.getDescription());
@@ -109,45 +111,80 @@ public class GardenDAOImpl implements GardenDAO {
 		}
 		return false;
 	}
-	
-	//deletes film by ID
-		@Override
-		public boolean deletePlant(int plantId) {
-			Connection conn = null;
-			  try {
-		    conn = DriverManager.getConnection(URL, user, pass);
-		    conn.setAutoCommit(false); // START TRANSACTION
-		    String sql = "DELETE FROM Plant WHERE id = ?";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
-		    stmt.setInt(1, plantId);
-		    System.out.println(stmt);
-		    int updateCount = stmt.executeUpdate();
-//		    sql = "DELETE FROM film WHERE id = ?";
-//		    stmt = conn.prepareStatement(sql);
-//		    stmt.setInt(1, plantId);
-//		    updateCount = stmt.executeUpdate();
-					conn.commit(); // COMMIT TRANSACTION
-					stmt.close();
-					return true;
-			} catch (Exception sqle) {
-				sqle.printStackTrace();
-				if (conn != null) {
-					try {
-						conn.rollback();
-					} catch (Exception sqle2) {
-						System.err.println("Error trying to rollback");
-					}
-				}
-				return false;
-			} finally {
-				try {
 
-					conn.close();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
+	// deletes film by ID
+	@Override
+	public boolean deletePlant(int plantId) {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "DELETE FROM Plant WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, plantId);
+			int updateCount = stmt.executeUpdate();
+			conn.commit(); // COMMIT TRANSACTION
+			stmt.close();
+			return true;
+		} catch (Exception sqle) {
+			sqle.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (Exception sqle2) {
+					System.err.println("Error trying to rollback");
 				}
 			}
-		}
+			return false;
+		} finally {
+			try {
 
-}
+				conn.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+		public Boolean addPlant(Plant plant) {
+			Connection conn = null;
+			try {
+				conn = DriverManager.getConnection(URL, user, pass);
+				conn.setAutoCommit(false); // START TRANSACTION
+				String sql = "INSERT into Plant (name,description,optimal_sun,optimal_soil,planting_considerations,when_to_plant, "
+							+ "	growing_from_seed,transplanting,spacing,watering,feeding,other_care,diseases,pests,harvesting,storage_use) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1, plant.getName());
+				stmt.setString(2, plant.getDescription());
+				stmt.setString(3, plant.getOptimalSun());
+				stmt.setString(4, plant.getOptimalSoil());
+				stmt.setString(5, plant.getPlantingConsiderations());
+				stmt.setString(6, plant.getWhenToPlant());
+				stmt.setString(7, plant.getGrowingFromSeed());
+				stmt.setString(8, plant.getTransplanting());
+				stmt.setString(9, plant.getSpacing());
+				stmt.setString(10, plant.getWatering());
+				stmt.setString(11, plant.getFeeding());
+				stmt.setString(12, plant.getOtherCare());
+				stmt.setString(13, plant.getDiseases());
+				stmt.setString(14, plant.getPests());
+				stmt.setString(15, plant.getHarvesting());
+				stmt.setString(16, plant.getStorageUse());
+				int updateCount = stmt.executeUpdate();
+				if (updateCount == 1) {
+					ResultSet keys = stmt.getGeneratedKeys();
+					if (keys.next()) {
+						int newPlantId = keys.getInt(1);
+						plant.setId(newPlantId);
+					}
+				}
+				conn.commit(); // COMMIT TRANSACTION
+				return true;
+			} catch (SQLException sqle) {
+				return false;
+			}
+		}
+	}
+

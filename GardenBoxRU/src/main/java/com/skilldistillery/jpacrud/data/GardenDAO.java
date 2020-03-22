@@ -10,4 +10,5 @@ public interface GardenDAO {
 	List<Plant>  findAll();
 	boolean updatePlant(Plant plant);
 	boolean deletePlant(int plantId);
+	Boolean addPlant(Plant plant);
 }

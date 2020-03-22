@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -25,6 +27,55 @@ public class GardenDAOImpl implements GardenDAO {
 
 	@PersistenceContext
 	EntityManager em;
+
+	// returns plant by keyword,
+	public List<Plant> findPlantByKeyword(String keyword) {
+		String searchWord = "%" + keyword + "%";
+		List<Plant> plants = new ArrayList<>();
+		plants = null;
+		try (Connection conn = DriverManager.getConnection(URL, user, pass)) {
+//			String sql = "SELECT * FROM film JOIN language ON film.language_id = language.id WHERE title like ? or description like ?";
+//			PreparedStatement pst = conn.prepareStatement(sql);
+//			pst.setString(1, searchWord);
+//			pst.setString(2, searchWord);
+//			ResultSet rs = pst.executeQuery();
+			
+			Query query = em.createQuery("SELECT s FROM Plant s WHERE s.name like :searchword OR s.description like :searchword1");
+			query.setParameter("searchword", searchWord);
+			query.setParameter("searchword1", searchWord);
+
+			plants = query.getResultList();
+			
+			if (plants.size() > 0) {
+				return plants;
+			}
+			
+//			while (rs.next()) {
+//				Plant plant = new Plant();
+//				plant.setId(rs.getInt("id"));
+//				plant.setTitle(rs.getString("title"));
+//				plant.setDescription(rs.getString("description"));
+//				plant.setReleaseYear(rs.getInt("release_year"));
+//				plant.setLanguageId(rs.getInt("language_id"));
+//				plant.setRentalDuration(rs.getInt("rental_duration"));
+//				plant.setRentalRate(rs.getDouble("rental_rate"));
+//				plant.setLength(rs.getInt("length"));
+//				plant.setReplacementCost(rs.getDouble("replacement_cost"));
+//				plant.setRating(rs.getString("rating"));
+//				plant.setSpecialFeatures(rs.getString("special_features"));
+//				plant.setActors(findActorsByFilmId(plant.getId()));
+//				plant.setLanguage(findLanguageById(plant.getId()));
+//				films.add(plant);
+//			}
+//			rs.close();
+//			pst.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return plants;
+		}
+		return plants;
+	}
 
 	@Override
 	public Plant findById(int id) {
@@ -47,49 +98,48 @@ public class GardenDAOImpl implements GardenDAO {
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			System.out.println(plant);
-			String jpql = "Update Plant set id=?," // 1
-					+ " plant.name=?," // 2
-					+ " plant.description=?," // 3
-					+ " plant.optimal_sun=?," // 4
-					+ " plant.optimal_soil=?," // 5
-					+ " plant.planting_considerations=?," // 6
-					+ " plant.when_to_plant=?," // 7
-					+ " plant.growing_from_seed=?," // 8
-					+ " plant.transplanting=?," // 9
-					+ " plant.spacing=?," // 10
-					+ " plant.watering=?," // 11
-					+ " plant.feeding=?," // 12
-					+ " plant.other_care=?," // 13
-					+ " plant.diseases=?," // 14
-					+ " plant.pests=?," // 15
-					+ " plant.harvesting=?," // 16
-					+ " plant.storage_use=?" // 17
-					+ " WHERE plant.id=?"; // 18
-			PreparedStatement stmt = conn.prepareStatement(jpql);
-			stmt.setInt(1, plant.getId());
-			stmt.setString(2, plant.getName());
-			stmt.setString(3, plant.getDescription());
-			stmt.setString(4, plant.getOptimalSun());
-			stmt.setString(5, plant.getOptimalSoil());
-			stmt.setString(6, plant.getPlantingConsiderations());
-			stmt.setString(7, plant.getWhenToPlant());
-			stmt.setString(8, plant.getGrowingFromSeed());
-			stmt.setString(9, plant.getTransplanting());
-			stmt.setString(10, plant.getSpacing());
-			stmt.setString(11, plant.getWatering());
-			stmt.setString(12, plant.getFeeding());
-			stmt.setString(13, plant.getOtherCare());
-			stmt.setString(14, plant.getDiseases());
-			stmt.setString(15, plant.getPests());
-			stmt.setString(16, plant.getHarvesting());
-			stmt.setString(17, plant.getStorageUse());
-			stmt.setInt(18, plant.getId());
-			int updateCount = stmt.executeUpdate();
-			if (updateCount == 1) {
+			String jpql = "UPDATE Plant s SET s.id=:pid," // 1
+					+ " s.name=:pname," // 2
+					+ " s.description=:descr," // 3
+					+ " s.optimalSun=:optsun," // 4
+					+ " s.optimalSoil=:optsoil," // 5
+					+ " s.plantingConsiderations=:planting," // 6
+					+ " s.whenToPlant=:whento," // 7
+					+ " s.growingFromSeed=:growing," // 8
+					+ " s.transplanting=:trans," // 9
+					+ " s.spacing=:spacing," // 10
+					+ " s.watering=:water," // 11
+					+ " s.feeding=:feed," // 12
+					+ " s.otherCare=:other," // 13
+					+ " s.diseases=:disease," // 14
+					+ " s.pests=:pest," // 15
+					+ " s.harvesting=:harvest," // 16
+					+ " s.storageUse=:storage" // 17
+					+ " WHERE s.id=:cond"; // 18
+			Query query = em.createQuery(jpql);
+			query.setParameter("pid", plant.getId());
+			query.setParameter("pname", plant.getName());
+			query.setParameter("descr", plant.getDescription());
+			query.setParameter("optsun", plant.getOptimalSun());
+			query.setParameter("optsoil", plant.getOptimalSoil());
+			query.setParameter("planting", plant.getPlantingConsiderations());
+			query.setParameter("whento", plant.getWhenToPlant());
+			query.setParameter("growing", plant.getGrowingFromSeed());
+			query.setParameter("trans", plant.getTransplanting());
+			query.setParameter("spacing", plant.getSpacing());
+			query.setParameter("water", plant.getWatering());
+			query.setParameter("feed", plant.getFeeding());
+			query.setParameter("other", plant.getOtherCare());
+			query.setParameter("disease", plant.getDiseases());
+			query.setParameter("pest", plant.getPests());
+			query.setParameter("harvest", plant.getHarvesting());
+			query.setParameter("storage", plant.getStorageUse());
+			query.setParameter("cond", plant.getId());
+			int rowCount = query.executeUpdate();
+
+			if (rowCount == 1) {
 				// COMMIT TRANSACTION
 				conn.commit();
-				stmt.close();
 				return true;
 			}
 		} catch (Exception sqle) {
@@ -122,7 +172,8 @@ public class GardenDAOImpl implements GardenDAO {
 			String sql = "DELETE FROM Plant WHERE id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, plantId);
-			int updateCount = stmt.executeUpdate();
+//			int updateCount = 
+			stmt.executeUpdate();
 			conn.commit(); // COMMIT TRANSACTION
 			stmt.close();
 			return true;
@@ -148,43 +199,42 @@ public class GardenDAOImpl implements GardenDAO {
 	}
 
 	@Override
-		public Boolean addPlant(Plant plant) {
-			Connection conn = null;
-			try {
-				conn = DriverManager.getConnection(URL, user, pass);
-				conn.setAutoCommit(false); // START TRANSACTION
-				String sql = "INSERT into Plant (name,description,optimal_sun,optimal_soil,planting_considerations,when_to_plant, "
-							+ "	growing_from_seed,transplanting,spacing,watering,feeding,other_care,diseases,pests,harvesting,storage_use) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				stmt.setString(1, plant.getName());
-				stmt.setString(2, plant.getDescription());
-				stmt.setString(3, plant.getOptimalSun());
-				stmt.setString(4, plant.getOptimalSoil());
-				stmt.setString(5, plant.getPlantingConsiderations());
-				stmt.setString(6, plant.getWhenToPlant());
-				stmt.setString(7, plant.getGrowingFromSeed());
-				stmt.setString(8, plant.getTransplanting());
-				stmt.setString(9, plant.getSpacing());
-				stmt.setString(10, plant.getWatering());
-				stmt.setString(11, plant.getFeeding());
-				stmt.setString(12, plant.getOtherCare());
-				stmt.setString(13, plant.getDiseases());
-				stmt.setString(14, plant.getPests());
-				stmt.setString(15, plant.getHarvesting());
-				stmt.setString(16, plant.getStorageUse());
-				int updateCount = stmt.executeUpdate();
-				if (updateCount == 1) {
-					ResultSet keys = stmt.getGeneratedKeys();
-					if (keys.next()) {
-						int newPlantId = keys.getInt(1);
-						plant.setId(newPlantId);
-					}
+	public Boolean addPlant(Plant plant) {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "INSERT into Plant (name,description,optimal_sun,optimal_soil,planting_considerations,when_to_plant, "
+					+ "	growing_from_seed,transplanting,spacing,watering,feeding,other_care,diseases,pests,harvesting,storage_use) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, plant.getName());
+			stmt.setString(2, plant.getDescription());
+			stmt.setString(3, plant.getOptimalSun());
+			stmt.setString(4, plant.getOptimalSoil());
+			stmt.setString(5, plant.getPlantingConsiderations());
+			stmt.setString(6, plant.getWhenToPlant());
+			stmt.setString(7, plant.getGrowingFromSeed());
+			stmt.setString(8, plant.getTransplanting());
+			stmt.setString(9, plant.getSpacing());
+			stmt.setString(10, plant.getWatering());
+			stmt.setString(11, plant.getFeeding());
+			stmt.setString(12, plant.getOtherCare());
+			stmt.setString(13, plant.getDiseases());
+			stmt.setString(14, plant.getPests());
+			stmt.setString(15, plant.getHarvesting());
+			stmt.setString(16, plant.getStorageUse());
+			int updateCount = stmt.executeUpdate();
+			if (updateCount == 1) {
+				ResultSet keys = stmt.getGeneratedKeys();
+				if (keys.next()) {
+					int newPlantId = keys.getInt(1);
+					plant.setId(newPlantId);
 				}
-				conn.commit(); // COMMIT TRANSACTION
-				return true;
-			} catch (SQLException sqle) {
-				return false;
 			}
+			conn.commit(); // COMMIT TRANSACTION
+			return true;
+		} catch (SQLException sqle) {
+			return false;
 		}
 	}
-
+}

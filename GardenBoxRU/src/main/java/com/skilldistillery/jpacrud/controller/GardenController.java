@@ -1,5 +1,7 @@
 package com.skilldistillery.jpacrud.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,22 @@ public class GardenController {
 		model.addAttribute("plants", dao.findAll());
 		return "WEB-INF/index.jsp";
 	}
-
+	
+	// finds Plant by keyword
+	@RequestMapping(path = "keywordSearch.do", method = RequestMethod.GET)
+	public String keywordSearch(String keyword, Model model) {
+		System.out.println(keyword);
+		List<Plant> plant = dao.findPlantByKeyword(keyword);
+		if (plant.size() != 0) {
+			model.addAttribute("plant", plant);
+			return "/WEB-INF/keywordFind.jsp";
+		} else {
+			return "/WEB-INF/nSearch.jsp";
+		
+		}
+	}
+	
+	//Displays successful or unsuccessful db search
 	@RequestMapping(path = "getPlant.do", method = RequestMethod.GET, params = "pid")
 	public String showPlant(@RequestParam Integer pid, Model model) {
 		String viewName = "WEB-INF/pSearch.jsp";

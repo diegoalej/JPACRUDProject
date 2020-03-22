@@ -11,4 +11,5 @@ public interface GardenDAO {
 	boolean updatePlant(Plant plant);
 	boolean deletePlant(int plantId);
 	Boolean addPlant(Plant plant);
+	public List<Plant> findPlantByKeyword(String keyword);
 }

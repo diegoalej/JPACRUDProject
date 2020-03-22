@@ -12,12 +12,12 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/myStyles.css">
-<title>Update Successful</title>
+<title>Search Successful</title>
 </head>
 <body>
 	<!-- NAVIGATION -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Garden App</a>
+		<a class="navbar-brand" href="home.do">Garden App</a>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
@@ -88,7 +88,7 @@
 			</table>
 		</div>
 	</div>
-	
+	<br>
 	<div class="container">
 		<div class="row">
 			<p>
@@ -97,6 +97,14 @@
 					data-target="#collapsePlant" aria-expanded="false"
 					aria-controls="collapsePlant">Update Plant</button>
 			</p>
+			<p>
+
+				<form:form action="plantDelete.do" method="POST"
+					modelAttribute="plant">
+					<input type="hidden" value="${plant.id}" name="Delete" />
+					<input class="btn btn-primary" type="submit" value="Delete Plant" name="Delete" />
+				</form:form>
+			</p>
 		</div>
 		<div class="collapse" id="collapsePlant">
 			<div class="row">
@@ -104,75 +112,41 @@
 					<form:form class="form-horizontal" action="updatePlant.do"
 						method="POST">
 						<div class="form-group">
-						<label> Plant name </label>
-						<input class="form-control" type="text" name="name"
-							value="${plant.name}" />
-						<br>
-						<label> Plant description </label>
-						<input class="form-control" type="text" name="description"
-							value="${plant.description}" />
-						<br>
-						<label> Optimal sun </label>
-						<input class="form-control" type="text" name="optimalSun"
-							value="${plant.optimalSun}" />
-						<br>
-						<label> Optimal soil </label>
-						<input class="form-control" type="text" name="optimalSoil"
-							value="${plant.optimalSoil}" />
-						<br>
-						<label> Planting Considerations </label>
-						<input class="form-control" type="text"
-							name="plantingConsiderations"
-							value="${plant.plantingConsiderations}" />
-						<br>
-						<label> When to plant </label>
-						<input class="form-control" type="text" name="whenToPlant"
-							value="${plant.whenToPlant}" />
-						<br>
-						<label> Growing from seed </label>
-						<input class="form-control" type="text" name="growingFromSeed"
-							value="${plant.growingFromSeed}" />
-						<br>
-						<label> Transplanting </label>
-						<input class="form-control" type="text" name="transplanting"
-							value="${plant.transplanting}" />
-						<br>
-						<label> Spacing </label>
-						<input class="form-control" type="text" name="spacing"
-							value="${plant.spacing}" />
-						<br>
-						<label> Watering </label>
-						<input class="form-control" type="text" name="watering"
-							value="${plant.watering}" />
-						<br>
-						<label> Feeding </label>
-						<input class="form-control" type="text" name="feeding"
-							value="${plant.feeding}" />
-						<br>
-						<label> Other care </label>
-						<input class="form-control" type="text" name="otherCare"
-							value="${plant.otherCare}" />
-						<br>
-						<label> Diseases </label>
-						<input class="form-control" type="text" name="diseases"
-							value="${plant.diseases}" />
-						<br>
-						<label> Pests </label>
-						<input class="form-control" type="text" name="pests"
-							value="${plant.pests}" />
-						<br>
-						<label> Harvesting </label>
-						<input class="form-control" type="text" name="harvesting"
-							value="${plant.harvesting}" />
-						<br>
-						<label> Storage/use </label>
-						<input class="form-control" type="text" name="storageUse"
-							value="${plant.storageUse}" />
-						<br>
-						<input class="form-control" type="hidden" name="id"
-							value="${plant.id}" />
-						<br>
-						<input type="submit" value="Update Plant" />
+							<label> Plant name </label> <input class="form-control"
+								type="text" name="name" value="${plant.name}" /> <br> <label>
+								Plant description </label> <input class="form-control" type="text"
+								name="description" value="${plant.description}" /> <br> <label>
+								Optimal sun </label> <input class="form-control" type="text"
+								name="optimalSun" value="${plant.optimalSun}" /> <br> <label>
+								Optimal soil </label> <input class="form-control" type="text"
+								name="optimalSoil" value="${plant.optimalSoil}" /> <br> <label>
+								Planting Considerations </label> <input class="form-control" type="text"
+								name="plantingConsiderations"
+								value="${plant.plantingConsiderations}" /> <br> <label>
+								When to plant </label> <input class="form-control" type="text"
+								name="whenToPlant" value="${plant.whenToPlant}" /> <br> <label>
+								Growing from seed </label> <input class="form-control" type="text"
+								name="growingFromSeed" value="${plant.growingFromSeed}" /> <br>
+							<label> Transplanting </label> <input class="form-control"
+								type="text" name="transplanting" value="${plant.transplanting}" />
+							<br> <label> Spacing </label> <input class="form-control"
+								type="text" name="spacing" value="${plant.spacing}" /> <br>
+							<label> Watering </label> <input class="form-control" type="text"
+								name="watering" value="${plant.watering}" /> <br> <label>
+								Feeding </label> <input class="form-control" type="text" name="feeding"
+								value="${plant.feeding}" /> <br> <label> Other
+								care </label> <input class="form-control" type="text" name="otherCare"
+								value="${plant.otherCare}" /> <br> <label>
+								Diseases </label> <input class="form-control" type="text"
+								name="diseases" value="${plant.diseases}" /> <br> <label>
+								Pests </label> <input class="form-control" type="text" name="pests"
+								value="${plant.pests}" /> <br> <label> Harvesting
+							</label> <input class="form-control" type="text" name="harvesting"
+								value="${plant.harvesting}" /> <br> <label>
+								Storage/use </label> <input class="form-control" type="text"
+								name="storageUse" value="${plant.storageUse}" /> <br> <input
+								class="form-control" type="hidden" name="id" value="${plant.id}" />
+							<br> <input type="submit" value="Update Plant" />
 						</div>
 					</form:form>
 				</div>

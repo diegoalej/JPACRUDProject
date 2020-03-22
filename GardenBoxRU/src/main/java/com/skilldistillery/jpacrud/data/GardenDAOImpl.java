@@ -17,13 +17,20 @@ import com.skilldistillery.jpacrud.entities.Plant;
 @Service
 @Transactional
 public class GardenDAOImpl implements GardenDAO {
+	private String URL = "jdbc:mysql://localhost:3306/gardendb?useSSL=false";
+	private String user = "gardenuser";
+	private String pass = "gardenuser";
 
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
 	public Plant findById(int id) {
-		return em.find(Plant.class, id);
+		Plant findPlant = em.find(Plant.class, id);
+		if (findPlant == null) {
+			return null;
+		}
+		return findPlant;
 	}
 
 	@Override
@@ -34,9 +41,6 @@ public class GardenDAOImpl implements GardenDAO {
 
 	// updates FILM with USER INPUT
 	public boolean updatePlant(Plant plant) {
-		String URL = "jdbc:mysql://localhost:3306/gardendb?useSSL=false";
-		String user = "gardenuser";
-		String pass = "gardenuser";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
@@ -105,5 +109,45 @@ public class GardenDAOImpl implements GardenDAO {
 		}
 		return false;
 	}
+	
+	//deletes film by ID
+		@Override
+		public boolean deletePlant(int plantId) {
+			Connection conn = null;
+			  try {
+		    conn = DriverManager.getConnection(URL, user, pass);
+		    conn.setAutoCommit(false); // START TRANSACTION
+		    String sql = "DELETE FROM Plant WHERE id = ?";
+		    PreparedStatement stmt = conn.prepareStatement(sql);
+		    stmt.setInt(1, plantId);
+		    System.out.println(stmt);
+		    int updateCount = stmt.executeUpdate();
+//		    sql = "DELETE FROM film WHERE id = ?";
+//		    stmt = conn.prepareStatement(sql);
+//		    stmt.setInt(1, plantId);
+//		    updateCount = stmt.executeUpdate();
+					conn.commit(); // COMMIT TRANSACTION
+					stmt.close();
+					return true;
+			} catch (Exception sqle) {
+				sqle.printStackTrace();
+				if (conn != null) {
+					try {
+						conn.rollback();
+					} catch (Exception sqle2) {
+						System.err.println("Error trying to rollback");
+					}
+				}
+				return false;
+			} finally {
+				try {
+
+					conn.close();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
 
 }

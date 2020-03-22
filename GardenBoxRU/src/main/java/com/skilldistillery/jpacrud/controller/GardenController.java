@@ -26,6 +26,9 @@ public class GardenController {
 	public String showPlant(@RequestParam Integer pid, Model model) {
 		String viewName = "pSearch";
 		Plant plant = dao.findById(pid);
+		if (plant == null) {
+			return "nSearch";
+		}
 		model.addAttribute("plant", plant);
 
 		return viewName;
@@ -41,4 +44,14 @@ public class GardenController {
 			return "updateFail";
 		}
 	}
+	
+	// deletes Plant by id
+		@RequestMapping("plantDelete.do")
+		public String deletePlant(@RequestParam("Delete") int plantId) {
+			if (dao.deletePlant(plantId)) {
+				return "deleteSuccess";
+			} else {
+				return "deleteFail";
+			}
+		}
 }

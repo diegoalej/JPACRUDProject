@@ -48,18 +48,14 @@
 			<div class="row justify-content-sm-center">
 				<div class="col-sm-12 justify-content-center pb-2">
 					<p>The GardenBox app is here to help you as a reference and
-						planner for your home garden project. To get started search for a
+						planner for your current or next home garden project. To get started search for a
 						particular item below or browse through our database to find out
-						some great info and gardening tips. You can also make use of our
-						GardenBox tool to help you plan out and visualize your next
-						gardening project!</p>
+						more about many common home gardening plants.</p>
 				</div>
 			</div>
 			<div class="row justify-content-sm-center">
 				<div class="col-sm-12 justify-content-center">
-					<p>Look through our Plant list below for some great gardening
-						tips, also feel free to add new plants to improve and grow our
-						knowledge.</p>
+					<p>Feel free to add new plants to improve our growing database.</p>
 				</div>
 				<div class="container">
 					<div class="row">
@@ -84,7 +80,7 @@
 										<form action="getPlant.do" method="GET" class="form">
 											Search by Id: <input type="text" name="pid"
 												class="form-control" /> <input type="submit"
-												value="Find Plant" class="form-control" />
+												value="Find Plant" class="btn btn-primary" />
 										</form>
 									</div>
 								</div>
@@ -96,7 +92,7 @@
 										<form action="keywordSearch.do" method="GET" class="form">
 											Search by Keyword: <input type="text" name="keyword"
 												class="form-control" /> <input type="submit"
-												value="Find Plant" class="form-control" />
+												value="Find Plant" class="btn btn-primary" />
 										</form>
 									</div>
 								</div>
@@ -156,7 +152,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-2">
-							<p>This is an image</p>
+							<p><img src="images/tomatoes.jpg" alt="tomatoes picture" class="img-thumbnail"></p>
 						</div>
 						<div class="col-sm-10">
 							<p>${x.description}</p>
@@ -180,14 +176,17 @@
 	</div>
 
 	<!-- Footer -->
-	<footer class="page-footer font-small blue">
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright: GardenBox App
+	<footer class="footer font-small">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Copyright -->
+					<div class="footer-copyright text-center py-3">© 2020
+						Copyright: GardenBox App</div>
+					<!-- Copyright -->
+				</div>
+			</div>
 		</div>
-		<!-- Copyright -->
-
 	</footer>
 	<!-- Footer -->
 	<!-- BOOTSTRAP JS FILES -->

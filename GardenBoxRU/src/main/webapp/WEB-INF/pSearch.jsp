@@ -53,7 +53,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-2">
-					<p>This is an image</p>
+					<p><img src="images/tomatoes.jpg" alt="tomatoes picture" class="img-thumbnail"></p>
 				</div>
 				<div class="col-sm-10">
 					<p>${plant.description}</p>
@@ -231,12 +231,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3 d-flex justify-content-center pb-3">
-						<form:form action="plantDelete.do" method="POST"
-				modelAttribute="plant">
-				<input type="hidden" value="${plant.id}" name="Delete" />
-				<input class="btn btn-primary" type="submit" value="Delete Plant"
-					name="Delete" />
-			</form:form>
+					<form:form action="plantDelete.do" method="POST"
+						modelAttribute="plant">
+						<input type="hidden" value="${plant.id}" name="Delete" />
+						<input class="btn btn-primary" type="submit" value="Delete Plant"
+							name="Delete" />
+					</form:form>
 				</div>
 				<div class="col-sm-3 d-flex justify-content-center pb-3">
 					<button class="btn btn-primary mr-5" type="button"
@@ -298,7 +298,7 @@
 									name="storageUse" value="${plant.storageUse}" /> <br> <input
 									class="form-control" type="hidden" name="id"
 									value="${plant.id}" /> <br> <input type="submit"
-									value="Update Plant" />
+									value="Update Plant" class="btn btn-primary"/>
 							</div>
 						</form:form>
 					</div>
@@ -312,7 +312,7 @@
 								<form action="getPlant.do" method="GET" class="form">
 									Search by Id: <input type="text" name="pid"
 										class="form-control" /> <input type="submit"
-										value="Find Plant" class="form-control" />
+										value="Find Plant" class="btn btn-primary" />
 								</form>
 							</div>
 						</div>
@@ -324,7 +324,7 @@
 								<form action="keywordSearch.do" method="GET" class="form">
 									Search by Keyword: <input type="text" name="keyword"
 										class="form-control" /> <input type="submit"
-										value="Find Plant" class="form-control" />
+										value="Find Plant" class="btn btn-primary" />
 								</form>
 							</div>
 						</div>
@@ -365,7 +365,7 @@
 								<label> Storage/use </label> <input class="form-control"
 									type="text" name="storageUse" /> <br> <input
 									class="form-control" type="hidden" name="id" value="0" /> <input
-									type="submit" value="Add New Plant" />
+									type="submit" value="Add New Plant" class="btn btn-primary"/>
 							</div>
 						</form:form>
 					</div>
@@ -373,15 +373,19 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- Footer -->
-	<footer class="page-footer font-small blue">
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright: GardenBox App
+	<footer class="footer font-small">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Copyright -->
+					<div class="footer-copyright text-center py-3">© 2020
+						Copyright: GardenBox App</div>
+					<!-- Copyright -->
+				</div>
+			</div>
 		</div>
-		<!-- Copyright -->
-
 	</footer>
 	<!-- Footer -->
 	<!-- BOOTSTRAP JS FILES -->

@@ -67,7 +67,7 @@
 								<form action="getPlant.do" method="GET" class="form">
 									Search by Id: <input type="text" name="pid"
 										class="form-control" /> <input type="submit"
-										value="Find Plant" class="form-control" />
+										value="Find Plant" class="btn btn-primary" />
 								</form>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 								<form action="keywordSearch.do" method="GET" class="form">
 									Search by Keyword: <input type="text" name="keyword"
 										class="form-control" /> <input type="submit"
-										value="Find Plant" class="form-control" />
+										value="Find Plant" class="btn btn-primary" />
 								</form>
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 								<label> Storage/use </label> <input class="form-control"
 									type="text" name="storageUse" /> <br> <input
 									class="form-control" type="hidden" name="id" value="0" /> <input
-									type="submit" value="Add New Plant" />
+									type="submit" value="Add New Plant" class="btn btn-primary"/>
 							</div>
 						</form:form>
 					</div>
@@ -129,14 +129,17 @@
 		</div>
 	</div>
 	<!-- Footer -->
-	<footer class="page-footer font-small blue">
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright: GardenBox App
+		<footer class="footer font-small">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Copyright -->
+					<div class="footer-copyright text-center py-3">© 2020
+						Copyright: GardenBox App</div>
+					<!-- Copyright -->
+				</div>
+			</div>
 		</div>
-		<!-- Copyright -->
-
 	</footer>
 	<!-- Footer -->
 	<!-- BOOTSTRAP JS FILES -->

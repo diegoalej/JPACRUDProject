@@ -135,7 +135,7 @@
 										<label> Storage/use </label> <input class="form-control"
 											type="text" name="storageUse" /> <br> <input
 											class="form-control" type="hidden" name="id" value="0" /> <input
-											type="submit" value="Add New Plant" />
+											type="submit" value="Add New Plant" class="btn btn-primary"/>
 									</div>
 								</form:form>
 							</div>

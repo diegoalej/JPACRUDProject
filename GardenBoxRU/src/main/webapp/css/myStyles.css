@@ -8,3 +8,21 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+
+.btn-primary {
+	  background-color: #4CAF50 !important; /* Green */
+	  border: none;
+}
+
+.navbar {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.navbar-brand {
+	color: white;
+}
+
+.nav-item {
+	color: white;
+}

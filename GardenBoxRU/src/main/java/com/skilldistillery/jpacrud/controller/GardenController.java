@@ -27,7 +27,9 @@ public class GardenController {
 	// finds Plant by keyword
 	@RequestMapping(path = "keywordSearch.do", method = RequestMethod.GET)
 	public String keywordSearch(String keyword, Model model) {
-		System.out.println(keyword);
+		if (keyword == null || keyword.isEmpty()) {
+			return "/WEB-INF/nSearch.jsp";
+		}
 		List<Plant> plant = dao.findPlantByKeyword(keyword);
 		if (plant.size() != 0) {
 			model.addAttribute("plant", plant);
@@ -42,6 +44,9 @@ public class GardenController {
 	@RequestMapping(path = "getPlant.do", method = RequestMethod.GET, params = "pid")
 	public String showPlant(@RequestParam Integer pid, Model model) {
 		String viewName = "WEB-INF/pSearch.jsp";
+		if (pid == null) {
+			return "WEB-INF/nSearch.jsp";
+		}
 		Plant plant = dao.findById(pid);
 		if (plant == null) {
 			return "WEB-INF/nSearch.jsp";

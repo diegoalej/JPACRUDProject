@@ -47,7 +47,7 @@
 			</div>
 			<div class="row justify-content-sm-center">
 				<div class="col-sm-12 justify-content-center pb-2">
-					<p>The GardenBox app is here to help you as a reference and
+					<p class="text-center">The GardenBox app is here to help you as a reference and
 						planner for your current or next home garden project. To get started search for a
 						particular item below or browse through our database to find out
 						more about many common home gardening plants.</p>
@@ -55,10 +55,10 @@
 			</div>
 			<div class="row justify-content-sm-center">
 				<div class="col-sm-12 justify-content-center">
-					<p>Feel free to add new plants to improve our growing database.</p>
+					<p class="text-center">Also, feel free to add new plants to improve our growing database.</p>
 				</div>
 				<div class="container">
-					<div class="row">
+					<div class="row pt-3">
 						<div class="col-sm-6 d-flex justify-content-center pb-3">
 							<button class="btn btn-primary" type="button"
 								data-toggle="collapse" data-target="#collapsePlant"
@@ -143,7 +143,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container">
+			<div class="container pt-2">
 				<c:forEach var="x" items="${plants}">
 					<div class="row">
 						<div class="col-sm-12">

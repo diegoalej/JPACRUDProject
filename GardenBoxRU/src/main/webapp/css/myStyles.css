@@ -12,6 +12,7 @@ body {
 .btn-primary {
 	background-color: #4CAF50 !important; /* Green */
 	border: none;
+	margin-left: 15px;
 }
 
 .navbar {
@@ -20,7 +21,6 @@ body {
 
 .footer {
 	background-color: #4CAF50;
-/* 	position: fixed; */
 	left: 0;
 	bottom: 0; 
 	width: 100%;
@@ -42,10 +42,3 @@ h1, h2, h3, h4 {
 	color: #592614;
 }
 
-/* h3 {
-	color: #592614;
-}
-
-h4 {
-	color: #592614;
-} */

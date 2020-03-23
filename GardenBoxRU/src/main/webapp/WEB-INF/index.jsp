@@ -26,15 +26,6 @@
 				<li class="nav-item active"><a class="nav-link" href="home.do">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href=""
-					id="navbarDropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Search by </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Plant id</a> <a
-							class="dropdown-item" href="#">Plant Name</a> <a
-							class="dropdown-item" href="#">Description keyword</a>
-					</div></li>
 				<li class="nav-item"><a class="nav-link" href="#">GardenBox
 						Tool</a></li>
 			</ul>
@@ -47,24 +38,38 @@
 		</div>
 	</nav>
 	<!-- MAIN BODY -->
-	<div class="fluid-container">
-		<div class="d-flex justify-content-center py-2">
-			<h1>Garden Box App</h1>
-		</div>
+	<div class="container">
 		<div class="container">
-			<div class="row">
-				<div class="d-flex justify-content-center p1">
-					<div class="form-group">
-						<form action="getPlant.do" method="GET" class="form">
-							Search by Id: <input type="text" name="pid" class="form-control" />
-							<input type="submit" value="Find Plant" class="form-control" />
-						</form>
+			<div class="row justify-content-sm-center">
+				<div class="col-12 d-flex justify-content-center py-2">
+					<h1>GardenBox App</h1>
+				</div>
+			</div>
+			<div class="row justify-content-sm-center">
+				<div class="col-sm-12 justify-content-center">
+					<p>The GardenBox app is here to help you as a reference and
+						planner for your home garden project. To get started search for a
+						particular item below or browse through our database to find out
+						some great info and gardening tips. You can also make use of our
+						GardenBox tool to help you plant out and visualize your next
+						gardening project!</p>
+				</div>
+			</div>
+			<div class="row justify-content-sm-center">
+				<div class="col-sm-6">
+					<div class="d-flex justify-content-center p1">
+						<div class="form-group pl-1">
+							<form action="getPlant.do" method="GET" class="form">
+								Search by Id: <input type="text" name="pid" class="form-control" />
+								<input type="submit" value="Find Plant" class="form-control" />
+							</form>
+						</div>
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="col-sm-6">
 					<div class="d-flex justify-content-center p1">
-						<div class="form-group">
+						<div class="form-group pl-1">
 							<form action="keywordSearch.do" method="GET" class="form">
 								Search by Keyword: <input type="text" name="keyword"
 									class="form-control" /> <input type="submit"
@@ -72,22 +77,26 @@
 							</form>
 						</div>
 					</div>
-					<br>
-					<div class="container">
-						<div class="row">
-							<p>
-
-								<button class="btn btn-primary" type="button"
-									data-toggle="collapse" data-target="#collapsePlant"
-									aria-expanded="false" aria-controls="collapsePlant">Add
-									New Plant</button>
-							</p>
-						</div>
-					</div>
 				</div>
+			</div>
+			<br>
+			<div class="row justify-content-sm-center">
+				<div class="col-sm-12 justify-content-center">
+					<p>You can look through our database below for some great tips,
+						also feel free to add new plants to improve and grow our
+						knowledge.</p>
+				</div>
+				<div class="col-sm-12 d-flex justify-content-center">
+					<button class="btn btn-primary" type="button"
+						data-toggle="collapse" data-target="#collapsePlant"
+						aria-expanded="false" aria-controls="collapsePlant">Add
+						New Plant</button>
+				</div>
+				<br>
+				<br>
 				<div class="collapse" id="collapsePlant">
-					<div class="row">
-						<div class="col-lg-12">
+					<div class="row ">
+						<div class="col-sm-12">
 							<form:form class="form-horizontal" action="addPlant.do"
 								modelAttribute="film">
 								<div class="form-group">
@@ -128,27 +137,37 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="container">
-			<div class="row">
-				<table>
-					<tr>
-						<th>Plant Name</th>
-						<th>Id</th>
-						<th>Storage/Use</th>
-					</tr>
-					<c:forEach var="x" items="${plants}">
-						<tr>
-							<td>${x.name}</td>
-							<td>${x.description}</td>
-							<td>${x.storageUse}</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+			<c:forEach var="x" items="${plants}">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>${x.name}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<p>This is an image</p>
+					</div>
+					<div class="col-sm-10">
+						<p>${x.description}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="d-flex justify-content-center p1">
+						<div class="form-group pl-1">
+							<form action="getPlant.do" method="GET" class="form">
+								<input type="hidden" name="pid" class="form-control"
+									value="${x.id}" /> <input type="submit" value="View Details"
+									class="form-control" />
+							</form>
+						</div>
+					</div>
+				</div>
+				<br>
+			</c:forEach>
 		</div>
 	</div>
+
 	<!-- BOOTSTRAP JS FILES -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

@@ -17,22 +17,13 @@
 <body>
 	<!-- NAVIGATION -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="home.do">Garden App</a>
+		<a class="navbar-brand" href="home.do">GardenBox App</a>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="home.do">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href=""
-					id="navbarDropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Search by </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Id</a> <a class="dropdown-item"
-							href="#">Name</a> <a class="dropdown-item" href="#">Description
-							keyword</a>
-					</div></li>
 				<li class="nav-item"><a class="nav-link" href="#">GardenBox
 						Tool</a></li>
 			</ul>
@@ -46,25 +37,40 @@
 	</nav>
 	<!-- MAIN BODY -->
 	<div class="container">
-		<div class="row">
-			<h1>Your plant was found</h1>
+		<div class="row justify-content-sm-center">
+			<div class="col-12 d-flex justify-content-center py-2">
+				<h2>See below for search results with your keyword</h2>
+			</div>
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
+		<div class="row-sm-10 justify-content-md-center">
 			<c:forEach var="x" items="${plant}">
-				<tr>
-					<td>${x.name}</td>
-					<td>${x.description}</td>
-					<c:choose>
-						<c:when test="${empty x.storageUse}">
-						</c:when>
-						<c:otherwise>
-							<td>${x.storageUse}</td>
-						</c:otherwise>
-						<br>
-					</c:choose>
-				</tr>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>${x.name}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<p>This is an image</p>
+					</div>
+					<div class="col-sm-10">
+						<p>${x.description}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="d-flex justify-content-center p1">
+						<div class="form-group pl-1">
+							<form action="getPlant.do" method="GET" class="form">
+								<input type="hidden" name="pid" class="form-control"
+									value="${x.id}" /> <input type="submit" value="View Details"
+									class="form-control" />
+							</form>
+						</div>
+					</div>
+				</div>
+				<br>
 			</c:forEach>
 		</div>
 	</div>

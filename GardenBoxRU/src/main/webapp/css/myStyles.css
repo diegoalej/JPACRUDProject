@@ -1,3 +1,10 @@
 body {
 	background-color: whitesmoke;
 }
+
+.container {
+  padding-right: 3em;
+  padding-left: 3em;
+  margin-right: auto;
+  margin-left: auto;
+}

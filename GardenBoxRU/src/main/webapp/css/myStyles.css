@@ -3,23 +3,29 @@ body {
 }
 
 .container {
-  padding-right: 3em;
-  padding-left: 3em;
-  margin-right: auto;
-  margin-left: auto;
+	padding-right: 3em;
+	padding-left: 3em;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .btn-primary {
-	  background-color: #4CAF50 !important; /* Green */
-	  border: none;
+	background-color: #4CAF50 !important; /* Green */
+	border: none;
 }
 
 .navbar {
 	background-color: #4CAF50;
 }
+
 footer {
 	background-color: #4CAF50;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
+
 .footer-copyright {
 	color: white;
 }
@@ -35,9 +41,11 @@ footer {
 h1 {
 	color: #592614;
 }
+
 h3 {
 	color: #592614;
 }
+
 h4 {
 	color: #592614;
 }

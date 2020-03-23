@@ -34,41 +34,16 @@ public class GardenDAOImpl implements GardenDAO {
 		List<Plant> plants = new ArrayList<>();
 		plants = null;
 		try (Connection conn = DriverManager.getConnection(URL, user, pass)) {
-//			String sql = "SELECT * FROM film JOIN language ON film.language_id = language.id WHERE title like ? or description like ?";
-//			PreparedStatement pst = conn.prepareStatement(sql);
-//			pst.setString(1, searchWord);
-//			pst.setString(2, searchWord);
-//			ResultSet rs = pst.executeQuery();
-			
-			Query query = em.createQuery("SELECT s FROM Plant s WHERE s.name like :searchword OR s.description like :searchword1");
+			Query query = em.createQuery(
+					"SELECT s FROM Plant s WHERE s.name like :searchword OR s.description like :searchword1");
 			query.setParameter("searchword", searchWord);
 			query.setParameter("searchword1", searchWord);
 
 			plants = query.getResultList();
-			
+
 			if (plants.size() > 0) {
 				return plants;
 			}
-			
-//			while (rs.next()) {
-//				Plant plant = new Plant();
-//				plant.setId(rs.getInt("id"));
-//				plant.setTitle(rs.getString("title"));
-//				plant.setDescription(rs.getString("description"));
-//				plant.setReleaseYear(rs.getInt("release_year"));
-//				plant.setLanguageId(rs.getInt("language_id"));
-//				plant.setRentalDuration(rs.getInt("rental_duration"));
-//				plant.setRentalRate(rs.getDouble("rental_rate"));
-//				plant.setLength(rs.getInt("length"));
-//				plant.setReplacementCost(rs.getDouble("replacement_cost"));
-//				plant.setRating(rs.getString("rating"));
-//				plant.setSpecialFeatures(rs.getString("special_features"));
-//				plant.setActors(findActorsByFilmId(plant.getId()));
-//				plant.setLanguage(findLanguageById(plant.getId()));
-//				films.add(plant);
-//			}
-//			rs.close();
-//			pst.close();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
